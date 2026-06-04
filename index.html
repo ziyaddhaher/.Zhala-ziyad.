@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ziyad ❤️ Pari</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+background:linear-gradient(135deg,#ffe5ec,#ffc2d1,#ff8fab);
+padding:20px;
+}
+
+.card{
+width:100%;
+max-width:450px;
+background:rgba(255,255,255,.25);
+backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,.3);
+border-radius:35px;
+padding:30px;
+text-align:center;
+box-shadow:
+0 20px 50px rgba(255,71,126,.25);
+z-index:10;
+
+h1{
+font-size:2.8rem;
+font-weight:900;
+margin-bottom:10px;
+
+background:linear-gradient(
+90deg,
+#ff006e,
+#ff477e,
+#ff7096
+);
+
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.subtitle{
+color:#555;
+font-size:1.1rem;
+margin-bottom:20px;
+}
+
+.counter{
+background:linear-gradient(
+135deg,
+#ff477e,
+#ff7096
+);
+
+color:white;
+
+padding:25px;
+
+border-radius:25px;
+
+margin-bottom:15px;
+}
+
+.days{
+font-size:4.5rem;
+font-weight:900;
+}
+
+.label{
+font-size:1rem;
+}
+
+.time{
+margin-top:10px;
+font-size:1rem;
+}
+
+.music{
+margin-top:10px;
+display:inline-block;
+padding:12px 20px;
+background:white;
+border-radius:30px;
+font-weight:bold;
+color:#ff477e;
+}
+
+.footer{
+margin-top:20px;
+color:#666;
+font-size:.95rem;
+}
+
+.floating-heart{
+position:absolute;
+bottom:-50px;
+pointer-events:none;
+animation:float linear forwards;
+}
+
+@keyframes float{
+to{
+transform:
+translateY(-120vh)
+rotate(360deg);
+opacity:0;
+}
+}
+
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop preload="auto">
+<source src="music.mp3.m4a" type="audio/mp4">
+</audio>
+
+<div class="card">
+
+<div class="couple-photo">
+<img src="file_00000000d67c7243bc80a8a37b4fe1bc(1).png" alt="Ziyad & Pari">
+</div>
+
+<h1>Ziyad ❤️ Pari</h1>
+
+<div class="subtitle">
+تۆ جوانترین ڕووداوی ژیانی منیت 🫀♾️
+</div>
+
+<div class="counter">
+
+<div id="days" class="days">0</div>
+
+<div class="label">
+ڕۆژ پێکەوەین
+</div>
+
+<div id="loveTime" class="time"></div>
+
+</div>
+
+<div id="musicStatus" class="music">
+🎵 دەست لە شاشەکە بدە بۆ لێدانی مۆسیقا
+</div>
+
+<div class="footer">
+💖 Since 09 / 01 / 2026
+</div>
+
+</div>
+
+<script>
+
+const startDate = new Date("2026-01-09T00:00:00");
+
+function updateCounter(){
+
+const now = new Date();
+
+const diff = now - startDate;
+
+const days = Math.floor(diff/(1000*60*60*24));
+
+const hours = Math.floor(
+(diff%(1000*60*60*24))
+/
+(1000*60*60)
+);
+
+const minutes = Math.floor(
+(diff%(1000*60*60))
+/
+(1000*60)
+);
+
+const seconds = Math.floor(
+(diff%(1000*60))
+/
+1000
+);
+
+document.getElementById("days").innerText = days;
+
+document.getElementById("loveTime").innerHTML =
+hours + " کاتژمێر • " +
+minutes + " خولەک • " +
+seconds + " چرکە";
+
+}
+
+updateCounter();
+setInterval(updateCounter,1000);
+
+const music =
+document.getElementById("bgMusic");
+
+const musicStatus =
+document.getElementById("musicStatus");
+
+let started = false;
+
+document.body.addEventListener("click",()=>{
+
+if(!started){
+
+music.play()
+.then(()=>{
+
+musicStatus.innerHTML =
+"🎵 مۆسیقا لێدەدات";
+
+started = true;
+
+})
+.catch(()=>{
+
+musicStatus.innerHTML =
+"❌ فایلەکە نەدۆزرایەوە";
+
+});
+
+}else{
+
+if(music.paused){
+
+music.play();
+
+musicStatus.innerHTML =
+"🎵 مۆسیقا لێدەدات";
+
+}else{
+
+music.pause();
+
+musicStatus.innerHTML =
+"⏸️ مۆسیقا ڕاگیرا";
+
+}
+
+}
+
+});
+
+function createHeart(){
+
+const heart =
+document.createElement("div");
+
+heart.className =
+"floating-heart";
+
+heart.innerHTML = "💖";
+
+heart.style.left =
+Math.random()*100 + "vw";
+
+heart.style.fontSize =
+(Math.random()*20 + 15) + "px";
+
+heart.style.animationDuration =
+(Math.random()*4 + 4) + "s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},8000);
+
+}
+
+setInterval(createHeart,250);
+
+</script>
+
+</body>
+</html>
